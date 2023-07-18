@@ -1,20 +1,13 @@
-from typing import Any, Dict
 import reflex as rx
-import json
 
-javascript_functions = """
-<script>
-
+javascript_functions = """<script>
 function test_func_1(jobj) {
   console.log('My name is ' + jobj.myname + ' and my action is ' + jobj.myaction);
 }
-
 function test_func_2(jobj) {
   console.log('My course is ' + jobj.mycourse + ' and my score is ' + jobj.myscore);
 }
-
-</script>
-"""
+</script>"""
 
 def scripts(js=javascript_functions):
     return rx.box(rx.html(js))
@@ -22,10 +15,10 @@ def scripts(js=javascript_functions):
 class State(rx.State):
     def btn_test_func_1(self):
         dobj = {"__func__":"test_func_1", "myname":"Milo", "myaction":"Jump"}
-        yield rx.brwosercall(dobj)
+        yield rx.browsercall(dobj)
     def btn_test_func_2(self):
         dobj = {"__func__":"test_func_2", "mycourse":"Math", "myscore":99}
-        yield rx.brwosercall(dobj)
+        yield rx.browsercall(dobj)
     def btn_test_func_3(self):
         dobj = {"__func__":"test_func_3", "mycourse":"Math", "myscore":"99"}
         yield rx.browsercall(dobj)
@@ -42,12 +35,6 @@ def index() -> rx.Component:
         ),
     )
 
-# Add state and page to the app.
 app = rx.App(state=State)
-app.add_page(index,
-    script_tags = [
-        scripts(),
-    ],
-)
-
+app.add_page(index, script_tags = [scripts()] )
 app.compile()
