@@ -22,16 +22,13 @@ def scripts(js=javascript_functions):
 class State(rx.State):
     def btn_test_func_1(self):
         dobj = {"__func__":"test_func_1", "myname":"Milo", "myaction":"Jump"}
-        yield browser_js_call(dobj)
+        yield rx.brwosercall(dobj)
     def btn_test_func_2(self):
         dobj = {"__func__":"test_func_2", "mycourse":"Math", "myscore":99}
-        yield browser_js_call(dobj)
+        yield rx.brwosercall(dobj)
     def btn_test_func_3(self):
         dobj = {"__func__":"test_func_3", "mycourse":"Math", "myscore":"99"}
-        yield browser_js_call(dobj)
-
-def browser_js_call(dobj:Dict[str,Any]):
-    return rx.browsercall(str(json.dumps(dobj)))
+        yield rx.browsercall(dobj)
 
 def index() -> rx.Component:
     return rx.fragment(
