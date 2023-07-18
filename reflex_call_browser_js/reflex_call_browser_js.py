@@ -5,23 +5,6 @@ import json
 javascript_functions = """
 <script>
 
-function dispatch(jobj) {
-  var func = jobj.__func__;
-  eval(func + '(jobj)');
-}
-
-browsercall = function(msg) {
-    console.log('browsercall is calling')
-    try {
-        var jobj = JSON.parse(msg);
-        dispatch(jobj);
-    } catch(e) {
-        console.log(e.name);
-        console.log(e.message);
-    }
-};
-
-
 window.alert = function(msg) {
     try {
         var jobj = JSON.parse(msg);
